@@ -49,18 +49,8 @@ return require("packer").startup(function(use)
 
 	use("ms-jpq/chadtree")
 
-	use({
-		"https://git.sr.ht/~whynothugo/lsp_lines.nvim",
-		config = function()
-			require("lsp_lines").setup()
-		end,
-	})
-	use({
-		"windwp/nvim-autopairs",
-		config = function()
-			require("nvim-autopairs").setup()
-		end,
-	})
+	use({"https://git.sr.ht/~whynothugo/lsp_lines.nvim"})
+	use({"windwp/nvim-autopairs"})
 	use({ "hoob3rt/lualine.nvim" })
 	use({ "tpope/vim-commentary" })
 end)
