@@ -26,3 +26,19 @@ vim.opt.signcolumn = "yes"
 vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
+
+vim.opt.foldexpr = "nvim_treesitter#foldexpr()"
+vim.opt.foldmethod = "expr"
+vim.opt.foldlevel = 9
+
+-- clean trailing spaces
+function RemoveTrailingSpaces()
+	local view = vim.fn.winsaveview()
+	vim.api.nvim_exec([[:%s/\s\+$//e]], false)
+	vim.fn.winrestview(view)
+end
+local on_buf_write_post = vim.api.nvim_create_augroup("RemoveTrailingSpace", { clear = true })
+vim.api.nvim_create_autocmd(
+	"BufWritePost",
+	{ pattern = "*", command = "silent lua RemoveTrailingSpaces()", group = on_buf_write_post }
+)
