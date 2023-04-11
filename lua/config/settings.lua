@@ -42,3 +42,8 @@ vim.api.nvim_create_autocmd(
 	"BufWritePost",
 	{ pattern = "*", command = "silent lua RemoveTrailingSpaces()", group = on_buf_write_post }
 )
+
+vim.opt.showmode = false
+
+vim.opt.cursorline = true
+vim.opt.cursorcolumn = true

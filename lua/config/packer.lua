@@ -23,7 +23,6 @@ return require("packer").startup(function(use)
 	use("nvim-treesitter/playground")
 	use("mbbill/undotree")
 	use("tpope/vim-fugitive")
-	use("f-person/git-blame.nvim")
 
 	use({
 		"VonHeikemen/lsp-zero.nvim",
@@ -49,8 +48,21 @@ return require("packer").startup(function(use)
 
 	use("ms-jpq/chadtree")
 
-	use({"https://git.sr.ht/~whynothugo/lsp_lines.nvim"})
-	use({"windwp/nvim-autopairs"})
+	use({ "https://git.sr.ht/~whynothugo/lsp_lines.nvim" })
+	use({ "windwp/nvim-autopairs" })
 	use({ "hoob3rt/lualine.nvim" })
 	use({ "tpope/vim-commentary" })
+	use({ "lewis6991/gitsigns.nvim", tag = "release" })
+    use {
+      "folke/zen-mode.nvim",
+      config = function()
+        require("zen-mode").setup {
+          -- your configuration comes here
+          -- or leave it empty to use the default settings
+          -- refer to the configuration section below
+        }
+      end
+    }
+    use({"skanehira/preview-uml.vim"})
+    use({ 'toppair/peek.nvim', run = 'deno task --quiet build:fast' })
 end)

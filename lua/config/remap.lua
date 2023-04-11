@@ -47,3 +47,55 @@ vim.keymap.set("i", "{", "{<c-g>u")
 vim.keymap.set("i", "}", "}<c-g>u")
 vim.keymap.set("i", "'", "'<c-g>u")
 vim.keymap.set("i", '"', '"<c-g>u')
+
+-- typewritter scroll
+local function typewritter_map(k)
+	vim.keymap.set("n", k, k .. "zz")
+end
+local function typewritter_unmap(k)
+	vim.keymap.set("n", k, k)
+end
+
+vim.g.typewritter = false
+function ToggleTypewriter()
+	local remap_keys = {
+		"k", -- move up
+		"j", -- move down
+		"gg", -- go to top
+		"G", -- go to bottom
+		"n", -- jump to next search result
+		"N", -- jump to previous search result
+        "dd", -- deleteline
+	}
+	if vim.g.typewritter == false then
+		for _, key in ipairs(remap_keys) do
+			typewritter_map(key)
+		end
+        vim.keymap.set("i", "<CR>", "<CR><ESC>zzi")
+
+		print("Typewriter view enabled")
+	else
+		for _, key in ipairs(remap_keys) do
+			typewritter_unmap(key)
+		end
+		print("Typewriter view disabled")
+	end
+	vim.g.typewritter = not vim.g.typewritter
+end
+ToggleTypewriter()
+vim.keymap.set("n", "<C-t>", function()
+	ToggleTypewriter()
+end)
+
+-- function TextChanging()
+--     if vim.b.previous_line ~= vim.b.changedtick then
+--         vim.b.previous_line = vim.fn.line(".")
+--     end
+-- end
+
+
+-- local text_changing = vim.api.nvim_create_augroup("Python", { clear = true })
+-- vim.api.nvim_create_autocmd(
+-- 	"TextChangedI",
+-- 	{ pattern = "*", command = "lua TextChanging()", group = text_changing }
+-- )

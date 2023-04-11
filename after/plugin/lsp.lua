@@ -4,7 +4,7 @@ lsp.preset("recommended")
 
 lsp.ensure_installed({
 	"pyright",
-	"sumneko_lua",
+	-- "sumneko_lua",
 	"rust_analyzer",
 })
 
@@ -29,7 +29,7 @@ lsp.setup_nvim_cmp({
 	mapping = cmp_mappings,
 })
 
-lsp.on_attach(function(client, bufnr)
+lsp.on_attach(function(_, bufnr)
 	local opts = {
 		buffer = bufnr,
 		remap = false,
@@ -37,17 +37,19 @@ lsp.on_attach(function(client, bufnr)
 	-- vim.keymap.set("n", "<C-o>", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "K", vim.lsp.buf.definition, opts)
 	vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "<C-h>", vim.lsp.buf.signature_help, opts)
+	vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
 end)
 
-lsp.configure("sumneko_lua", {
-	settings = {
-		Lua = {
-			diagnostics = {
-				globals = { "vim", "require" },
-			},
-		},
-	},
-})
+-- lsp.configure("sumneko_lua", {
+-- 	settings = {
+-- 		Lua = {
+-- 			diagnostics = {
+-- 				globals = { "vim", "require" },
+-- 			},
+-- 		},
+-- 	},
+-- })
 
 lsp.setup()
 

@@ -1,5 +1,6 @@
 -- keymaps
 vim.keymap.set("n", "<leader>s", 'o__import__("pdb").set_trace()<ESC>')
+vim.keymap.set("n", "<leader>d", 'o__import__("devtools").debug()<ESC>i')
 
 -- UI
 vim.opt.colorcolumn = { 80, 120 }
